@@ -1,0 +1,1279 @@
+{
+  "App": {
+    "name": "PiCtory",
+    "version": "2.14.0",
+    "saveTS": "20250101000000",
+    "language": "en",
+    "layout": {}
+  },
+  "Summary": {
+    "inpTotal": 0,
+    "outTotal": 0
+  },
+  "Devices": [
+    {
+      "App": {
+        "name": "PiCtory",
+        "version": "2.14.0",
+        "saveTS": "20251218103929",
+        "language": "en",
+        "layout": {
+          "north": {
+            "size": 70,
+            "initClosed": false,
+            "initHidden": false
+          },
+          "south": {
+            "size": 416,
+            "initClosed": false,
+            "initHidden": false,
+            "children": {
+              "layout1": {
+                "east": {
+                  "size": 592,
+                  "initClosed": false,
+                  "initHidden": false
+                }
+              }
+            }
+          },
+          "east": {
+            "size": 70,
+            "initClosed": true,
+            "initHidden": false,
+            "children": {}
+          },
+          "west": {
+            "size": 340,
+            "initClosed": false,
+            "initHidden": false,
+            "children": {
+              "layout1": {}
+            }
+          }
+        }
+      },
+      "Summary": {
+        "inpTotal": 40,
+        "outTotal": 34
+      },
+      "Devices": [
+        {
+          "GUID": "11beae98-56ed-119a-4117-194d7138553b",
+          "id": "device_RevPiMIO_20200901_1_0_001",
+          "type": "LEFT_RIGHT",
+          "productType": "118",
+          "position": "31",
+          "name": "RevPi MIO",
+          "bmk": "RevPi MIO",
+          "inpVariant": 0,
+          "outVariant": 0,
+          "comment": "This is Multi digital/analog inputs and outputs Device for RevPi",
+          "offset": 0,
+          "inp": {
+            "0": [
+              "DigitalInput_1",
+              "0",
+              "1",
+              "0",
+              true,
+              "0000",
+              "",
+              "0"
+            ],
+            "1": [
+              "DigitalInput_2",
+              "0",
+              "1",
+              "0",
+              true,
+              "0001",
+              "",
+              "1"
+            ],
+            "2": [
+              "DigitalInput_3",
+              "0",
+              "1",
+              "0",
+              true,
+              "0002",
+              "",
+              "2"
+            ],
+            "3": [
+              "DigitalInput_4",
+              "0",
+              "1",
+              "0",
+              true,
+              "0003",
+              "",
+              "3"
+            ],
+            "4": [
+              "ReservedDI_5",
+              "null",
+              "1",
+              "0",
+              true,
+              "0004",
+              "",
+              "4"
+            ],
+            "5": [
+              "ReservedDI_6",
+              "null",
+              "1",
+              "0",
+              true,
+              "0005",
+              "",
+              "5"
+            ],
+            "6": [
+              "ReservedDI_7",
+              "null",
+              "1",
+              "0",
+              true,
+              "0006",
+              "",
+              "6"
+            ],
+            "7": [
+              "ReservedDI_8",
+              "null",
+              "1",
+              "0",
+              true,
+              "0007",
+              "",
+              "7"
+            ],
+            "8": [
+              "DutyCycle_PulseLength_1",
+              "0",
+              "16",
+              "1",
+              true,
+              "0008",
+              "Dutycycle or PulseLength",
+              ""
+            ],
+            "9": [
+              "DutyCycle_PulseLength_2",
+              "0",
+              "16",
+              "3",
+              true,
+              "0009",
+              "Dutycycle or PulseLength",
+              ""
+            ],
+            "10": [
+              "DutyCycle_PulseLength_3",
+              "0",
+              "16",
+              "5",
+              true,
+              "0010",
+              "Dutycycle or PulseLength",
+              ""
+            ],
+            "11": [
+              "DutyCycle_PulseLength_4",
+              "0",
+              "16",
+              "7",
+              true,
+              "0011",
+              "Dutycycle or PulseLength",
+              ""
+            ],
+            "12": [
+              "Fpwm_PulseCount_1",
+              "0",
+              "16",
+              "9",
+              true,
+              "0012",
+              "Frequency or PulseCount DO",
+              ""
+            ],
+            "13": [
+              "Fpwm_PulseCount_2",
+              "0",
+              "16",
+              "11",
+              true,
+              "0013",
+              "Frequency or PulseCount DO",
+              ""
+            ],
+            "14": [
+              "Fpwm_PulseCount_3",
+              "0",
+              "16",
+              "13",
+              true,
+              "0014",
+              "Frequency or PulseCount DO",
+              ""
+            ],
+            "15": [
+              "Fpwm_PulseCount_4",
+              "0",
+              "16",
+              "15",
+              true,
+              "0015",
+              "Frequency or PulseCount DO",
+              ""
+            ],
+            "16": [
+              "AnalogInputLogicLevel_1",
+              "0",
+              "1",
+              "17",
+              false,
+              "0016",
+              "Logic Level (high/low) for analogInput",
+              "0"
+            ],
+            "17": [
+              "AnalogInputLogicLevel_2",
+              "0",
+              "1",
+              "17",
+              false,
+              "0017",
+              "Logic Level (high/low) for analogInput",
+              "1"
+            ],
+            "18": [
+              "AnalogInputLogicLevel_3",
+              "0",
+              "1",
+              "17",
+              false,
+              "0018",
+              "Logic Level (high/low) for analogInput",
+              "2"
+            ],
+            "19": [
+              "AnalogInputLogicLevel_4",
+              "0",
+              "1",
+              "17",
+              false,
+              "0019",
+              "Logic Level (high/low) for analogInput",
+              "3"
+            ],
+            "20": [
+              "AnalogInputLogicLevel_5",
+              "0",
+              "1",
+              "17",
+              false,
+              "0020",
+              "Logic Level (high/low) for analogInput",
+              "4"
+            ],
+            "21": [
+              "AnalogInputLogicLevel_6",
+              "0",
+              "1",
+              "17",
+              false,
+              "0021",
+              "Logic Level (high/low) for analogInput",
+              "5"
+            ],
+            "22": [
+              "AnalogInputLogicLevel_7",
+              "0",
+              "1",
+              "17",
+              false,
+              "0022",
+              "Logic Level (high/low) for analogInput",
+              "6"
+            ],
+            "23": [
+              "AnalogInputLogicLevel_8",
+              "0",
+              "1",
+              "17",
+              false,
+              "0023",
+              "Logic Level (high/low) for analogInput",
+              "7"
+            ],
+            "24": [
+              "AnalogInput_1",
+              "0",
+              "16",
+              "18",
+              true,
+              "0024",
+              "",
+              ""
+            ],
+            "25": [
+              "AnalogInput_2",
+              "0",
+              "16",
+              "20",
+              true,
+              "0025",
+              "",
+              ""
+            ],
+            "26": [
+              "AnalogInput_3",
+              "0",
+              "16",
+              "22",
+              true,
+              "0026",
+              "",
+              ""
+            ],
+            "27": [
+              "AnalogInput_4",
+              "0",
+              "16",
+              "24",
+              true,
+              "0027",
+              "",
+              ""
+            ],
+            "28": [
+              "AnalogInput_5",
+              "0",
+              "16",
+              "26",
+              true,
+              "0028",
+              "",
+              ""
+            ],
+            "29": [
+              "AnalogInput_6",
+              "0",
+              "16",
+              "28",
+              true,
+              "0029",
+              "",
+              ""
+            ],
+            "30": [
+              "AnalogInput_7",
+              "0",
+              "16",
+              "30",
+              true,
+              "0030",
+              "",
+              ""
+            ],
+            "31": [
+              "AnalogInput_8",
+              "0",
+              "16",
+              "32",
+              true,
+              "0031",
+              "",
+              ""
+            ]
+          },
+          "out": {
+            "0": [
+              "DigitalOutput_1",
+              "0",
+              "1",
+              "34",
+              true,
+              "0032",
+              "",
+              "0"
+            ],
+            "1": [
+              "DigitalOutput_2",
+              "0",
+              "1",
+              "34",
+              true,
+              "0033",
+              "",
+              "1"
+            ],
+            "2": [
+              "DigitalOutput_3",
+              "0",
+              "1",
+              "34",
+              true,
+              "0034",
+              "",
+              "2"
+            ],
+            "3": [
+              "DigitalOutput_4",
+              "0",
+              "1",
+              "34",
+              true,
+              "0035",
+              "",
+              "3"
+            ],
+            "4": [
+              "ReservedDO_5",
+              "null",
+              "1",
+              "34",
+              true,
+              "0036",
+              "",
+              "4"
+            ],
+            "5": [
+              "ReservedDO_6",
+              "null",
+              "1",
+              "34",
+              true,
+              "0037",
+              "",
+              "5"
+            ],
+            "6": [
+              "ReservedDO_7",
+              "null",
+              "1",
+              "34",
+              true,
+              "0038",
+              "",
+              "6"
+            ],
+            "7": [
+              "ReservedDO_8",
+              "null",
+              "1",
+              "34",
+              true,
+              "0039",
+              "",
+              "7"
+            ],
+            "8": [
+              "PwmDutycycle_1",
+              "0",
+              "16",
+              "35",
+              true,
+              "0040",
+              "",
+              ""
+            ],
+            "9": [
+              "PwmDutycycle_2",
+              "0",
+              "16",
+              "37",
+              true,
+              "0041",
+              "",
+              ""
+            ],
+            "10": [
+              "PwmDutycycle_3",
+              "0",
+              "16",
+              "39",
+              true,
+              "0042",
+              "",
+              ""
+            ],
+            "11": [
+              "PwmDutycycle_4",
+              "0",
+              "16",
+              "41",
+              true,
+              "0043",
+              "",
+              ""
+            ],
+            "12": [
+              "AnalogOutputLogicLevel_1",
+              "0",
+              "1",
+              "43",
+              false,
+              "0044",
+              "",
+              "0"
+            ],
+            "13": [
+              "AnalogOutputLogicLevel_2",
+              "0",
+              "1",
+              "43",
+              false,
+              "0045",
+              "",
+              "1"
+            ],
+            "14": [
+              "AnalogOutputLogicLevel_3",
+              "0",
+              "1",
+              "43",
+              false,
+              "0046",
+              "",
+              "2"
+            ],
+            "15": [
+              "AnalogOutputLogicLevel_4",
+              "0",
+              "1",
+              "43",
+              false,
+              "0047",
+              "",
+              "3"
+            ],
+            "16": [
+              "AnalogOutputLogicLevel_5",
+              "0",
+              "1",
+              "43",
+              false,
+              "0048",
+              "",
+              "4"
+            ],
+            "17": [
+              "AnalogOutputLogicLevel_6",
+              "0",
+              "1",
+              "43",
+              false,
+              "0049",
+              "",
+              "5"
+            ],
+            "18": [
+              "AnalogOutputLogicLevel_7",
+              "0",
+              "1",
+              "43",
+              false,
+              "0050",
+              "",
+              "6"
+            ],
+            "19": [
+              "AnalogOutputLogicLevel_8",
+              "0",
+              "1",
+              "43",
+              false,
+              "0051",
+              "",
+              "7"
+            ],
+            "20": [
+              "AnalogOutput_1",
+              "0",
+              "16",
+              "45",
+              true,
+              "0052",
+              "",
+              ""
+            ],
+            "21": [
+              "AnalogOutput_2",
+              "0",
+              "16",
+              "47",
+              true,
+              "0053",
+              "",
+              ""
+            ],
+            "22": [
+              "AnalogOutput_3",
+              "0",
+              "16",
+              "49",
+              true,
+              "0054",
+              "",
+              ""
+            ],
+            "23": [
+              "AnalogOutput_4",
+              "0",
+              "16",
+              "51",
+              true,
+              "0055",
+              "",
+              ""
+            ],
+            "24": [
+              "AnalogOutput_5",
+              "0",
+              "16",
+              "53",
+              true,
+              "0056",
+              "",
+              ""
+            ],
+            "25": [
+              "AnalogOutput_6",
+              "0",
+              "16",
+              "55",
+              true,
+              "0057",
+              "",
+              ""
+            ],
+            "26": [
+              "AnalogOutput_7",
+              "0",
+              "16",
+              "57",
+              true,
+              "0058",
+              "",
+              ""
+            ],
+            "27": [
+              "AnalogOutput_8",
+              "0",
+              "16",
+              "59",
+              true,
+              "0059",
+              "",
+              ""
+            ],
+            "28": [
+              "Reserved",
+              "null",
+              "8",
+              "44",
+              false,
+              "0107",
+              "",
+              ""
+            ]
+          },
+          "mem": {
+            "0": [
+              "EncoderMode",
+              "0",
+              "8",
+              "61",
+              false,
+              "0060",
+              "EncoderMode",
+              ""
+            ],
+            "1": [
+              "IO_Mode_1",
+              "0",
+              "8",
+              "62",
+              true,
+              "0061",
+              "Config digital IO mode",
+              ""
+            ],
+            "2": [
+              "IO_Mode_2",
+              "0",
+              "8",
+              "63",
+              true,
+              "0062",
+              "Config digital IO mode",
+              ""
+            ],
+            "3": [
+              "IO_Mode_3",
+              "3",
+              "8",
+              "64",
+              true,
+              "0063",
+              "Config digital IO mode",
+              ""
+            ],
+            "4": [
+              "IO_Mode_4",
+              "3",
+              "8",
+              "65",
+              true,
+              "0064",
+              "Config digital IO mode",
+              ""
+            ],
+            "5": [
+              "Pullup",
+              "0",
+              "8",
+              "66",
+              false,
+              "0065",
+              "",
+              ""
+            ],
+            "6": [
+              "PulseMode",
+              "0",
+              "8",
+              "67",
+              false,
+              "0066",
+              "",
+              ""
+            ],
+            "7": [
+              "FpwmOut_12",
+              "0",
+              "16",
+              "68",
+              false,
+              "0067",
+              "Pwm-Frequency of DO1 & DO2 in Hz",
+              ""
+            ],
+            "8": [
+              "FpwmOut_3",
+              "0",
+              "16",
+              "70",
+              false,
+              "0068",
+              "Pwm-Frequency of DO3 in Hz",
+              ""
+            ],
+            "9": [
+              "FpwmOut_4",
+              "0",
+              "16",
+              "72",
+              false,
+              "0069",
+              "Pwm-Frequency of DO4 in Hz",
+              ""
+            ],
+            "10": [
+              "PulseLength_1",
+              "0",
+              "16",
+              "74",
+              false,
+              "0070",
+              "Pulse-Length of DO [0-65535]",
+              ""
+            ],
+            "11": [
+              "PulseLength_2",
+              "0",
+              "16",
+              "76",
+              false,
+              "0071",
+              "Pulse-Length of DO [0-65535]",
+              ""
+            ],
+            "12": [
+              "PulseLength_3",
+              "0",
+              "16",
+              "78",
+              false,
+              "0072",
+              "Pulse-Length of DO [0-65535]",
+              ""
+            ],
+            "13": [
+              "PulseLength_4",
+              "0",
+              "16",
+              "80",
+              false,
+              "0073",
+              "Pulse-Length of DO [0-65535]",
+              ""
+            ],
+            "14": [
+              "AnalogInputMode_1",
+              "0",
+              "1",
+              "82",
+              true,
+              "0074",
+              "AnalogInput Mode",
+              "0"
+            ],
+            "15": [
+              "AnalogInputMode_2",
+              "0",
+              "1",
+              "82",
+              true,
+              "0075",
+              "AnalogInput Mode",
+              "1"
+            ],
+            "16": [
+              "AnalogInputMode_3",
+              "0",
+              "1",
+              "82",
+              true,
+              "0076",
+              "AnalogInput Mode",
+              "2"
+            ],
+            "17": [
+              "AnalogInputMode_4",
+              "0",
+              "1",
+              "82",
+              true,
+              "0077",
+              "AnalogInput Mode",
+              "3"
+            ],
+            "18": [
+              "AnalogInputMode_5",
+              "0",
+              "1",
+              "82",
+              true,
+              "0078",
+              "AnalogInput Mode",
+              "4"
+            ],
+            "19": [
+              "AnalogInputMode_6",
+              "0",
+              "1",
+              "82",
+              true,
+              "0079",
+              "AnalogInput Mode",
+              "5"
+            ],
+            "20": [
+              "AnalogInputMode_7",
+              "0",
+              "1",
+              "82",
+              true,
+              "0080",
+              "AnalogInput Mode",
+              "6"
+            ],
+            "21": [
+              "AnalogInputMode_8",
+              "0",
+              "1",
+              "82",
+              true,
+              "0081",
+              "AnalogInput Mode",
+              "7"
+            ],
+            "22": [
+              "InputLogicLevelVoltage_1",
+              "0",
+              "16",
+              "83",
+              false,
+              "0082",
+              "Switching threshold for analog inputs[0-10000]",
+              ""
+            ],
+            "23": [
+              "InputLogicLevelVoltage_2",
+              "0",
+              "16",
+              "85",
+              false,
+              "0083",
+              "Switching threshold for analog inputs[0-10000]",
+              ""
+            ],
+            "24": [
+              "InputLogicLevelVoltage_3",
+              "0",
+              "16",
+              "87",
+              false,
+              "0084",
+              "Switching threshold for analog inputs[0-10000]",
+              ""
+            ],
+            "25": [
+              "InputLogicLevelVoltage_4",
+              "0",
+              "16",
+              "89",
+              false,
+              "0085",
+              "Switching threshold for analog inputs[0-10000]",
+              ""
+            ],
+            "26": [
+              "InputLogicLevelVoltage_5",
+              "0",
+              "16",
+              "91",
+              false,
+              "0086",
+              "Switching threshold for analog inputs[0-10000]",
+              ""
+            ],
+            "27": [
+              "InputLogicLevelVoltage_6",
+              "0",
+              "16",
+              "93",
+              false,
+              "0087",
+              "Switching threshold for analog inputs[0-10000]",
+              ""
+            ],
+            "28": [
+              "InputLogicLevelVoltage_7",
+              "0",
+              "16",
+              "95",
+              false,
+              "0088",
+              "Switching threshold for analog inputs[0-10000]",
+              ""
+            ],
+            "29": [
+              "InputLogicLevelVoltage_8",
+              "0",
+              "16",
+              "97",
+              false,
+              "0089",
+              "Switching threshold for analog inputs[0-10000]",
+              ""
+            ],
+            "30": [
+              "FilterWindowSize",
+              "1",
+              "8",
+              "99",
+              false,
+              "0090",
+              "Filter width of the moving average filter",
+              ""
+            ],
+            "31": [
+              "AnalogOutputMode_1",
+              "0",
+              "1",
+              "100",
+              true,
+              "0091",
+              "AnalogOutput Mode",
+              "0"
+            ],
+            "32": [
+              "AnalogOutputMode_2",
+              "0",
+              "1",
+              "100",
+              true,
+              "0092",
+              "AnalogOutput Mode",
+              "1"
+            ],
+            "33": [
+              "AnalogOutputMode_3",
+              "0",
+              "1",
+              "100",
+              true,
+              "0093",
+              "AnalogOutput Mode",
+              "2"
+            ],
+            "34": [
+              "AnalogOutputMode_4",
+              "0",
+              "1",
+              "100",
+              true,
+              "0094",
+              "AnalogOutput Mode",
+              "3"
+            ],
+            "35": [
+              "AnalogOutputMode_5",
+              "0",
+              "1",
+              "100",
+              true,
+              "0095",
+              "AnalogOutput Mode",
+              "4"
+            ],
+            "36": [
+              "AnalogOutputMode_6",
+              "0",
+              "1",
+              "100",
+              true,
+              "0096",
+              "AnalogOutput Mode",
+              "5"
+            ],
+            "37": [
+              "AnalogOutputMode_7",
+              "0",
+              "1",
+              "100",
+              true,
+              "0097",
+              "AnalogOutput Mode",
+              "6"
+            ],
+            "38": [
+              "AnalogOutputMode_8",
+              "0",
+              "1",
+              "100",
+              true,
+              "0098",
+              "AnalogOutput Mode",
+              "7"
+            ],
+            "39": [
+              "OutputLogicLevelVoltage_1",
+              "0",
+              "16",
+              "101",
+              false,
+              "0099",
+              "Fixed output voltage for analog outputs[0-10000]",
+              ""
+            ],
+            "40": [
+              "OutputLogicLevelVoltage_2",
+              "0",
+              "16",
+              "103",
+              false,
+              "0100",
+              "Fixed output voltage for analog outputs[0-10000]",
+              ""
+            ],
+            "41": [
+              "OutputLogicLevelVoltage_3",
+              "0",
+              "16",
+              "105",
+              false,
+              "0101",
+              "Fixed output voltage for analog outputs[0-10000]",
+              ""
+            ],
+            "42": [
+              "OutputLogicLevelVoltage_4",
+              "0",
+              "16",
+              "107",
+              false,
+              "0102",
+              "Fixed output voltage for analog outputs[0-10000]",
+              ""
+            ],
+            "43": [
+              "OutputLogicLevelVoltage_5",
+              "0",
+              "16",
+              "109",
+              false,
+              "0103",
+              "Fixed output voltage for analog outputs[0-10000]",
+              ""
+            ],
+            "44": [
+              "OutputLogicLevelVoltage_6",
+              "0",
+              "16",
+              "111",
+              false,
+              "0104",
+              "Fixed output voltage for analog outputs[0-10000]",
+              ""
+            ],
+            "45": [
+              "OutputLogicLevelVoltage_7",
+              "0",
+              "16",
+              "113",
+              false,
+              "0105",
+              "Fixed output voltage for analog outputs[0-10000]",
+              ""
+            ],
+            "46": [
+              "OutputLogicLevelVoltage_8",
+              "0",
+              "16",
+              "115",
+              false,
+              "0106",
+              "Fixed output voltage for analog outputs[0-10000]",
+              ""
+            ]
+          },
+          "extend": {}
+        },
+        {
+          "GUID": "df12458a-0266-8aed-841a-5d710fee8f40",
+          "id": "device_RevPiConnect5_20240315_1_0_001",
+          "type": "BASE",
+          "productType": "138",
+          "position": "0",
+          "name": "RevPi Connect 5",
+          "bmk": "RevPi Connect 5",
+          "inpVariant": 0,
+          "outVariant": 0,
+          "comment": "This is a RevPi Connect 5 Device",
+          "offset": 117,
+          "inp": {
+            "0": [
+              "RevPiStatus",
+              "0",
+              "8",
+              "0",
+              true,
+              "0000",
+              "",
+              ""
+            ],
+            "1": [
+              "RevPiIOCycle",
+              "0",
+              "8",
+              "1",
+              true,
+              "0001",
+              "",
+              ""
+            ],
+            "2": [
+              "RS485ErrorCnt",
+              "0",
+              "16",
+              "2",
+              false,
+              "0002",
+              "",
+              ""
+            ],
+            "3": [
+              "Core_Temperature",
+              "0",
+              "8",
+              "4",
+              false,
+              "0003",
+              "",
+              ""
+            ],
+            "4": [
+              "Core_Frequency",
+              "0",
+              "8",
+              "5",
+              false,
+              "0004",
+              "",
+              ""
+            ]
+          },
+          "out": {
+            "0": [
+              "RevPiReservedByte",
+              "",
+              "8",
+              "6",
+              false,
+              "0005",
+              "",
+              ""
+            ],
+            "1": [
+              "RS485ErrorLimit1",
+              "10",
+              "16",
+              "7",
+              false,
+              "0006",
+              "",
+              ""
+            ],
+            "2": [
+              "RS485ErrorLimit2",
+              "1000",
+              "16",
+              "9",
+              false,
+              "0007",
+              "",
+              ""
+            ],
+            "3": [
+              "RevPiLED",
+              "0",
+              "16",
+              "11",
+              true,
+              "0008",
+              "",
+              ""
+            ]
+          },
+          "mem": {},
+          "extend": {}
+        }
+      ],
+      "Connections": [],
+      "offset": 0,
+      "position": "1",
+      "name": "RevPi MIO",
+      "bmk": "RevPi MIO"
+    }
+  ],
+  "Connections": []
+}
