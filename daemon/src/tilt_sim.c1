@@ -1,0 +1,91 @@
+// tilt.c
+#include <stdio.h>
+#include <stdbool.h>
+#include "tilt.h"
+
+// Simulated hardware functions
+extern float ReadTiltVoltage();     // returns 0–10 V
+extern void T_Dir_On();
+extern void T_Dir_Off();
+extern void T_En_On();
+extern void T_En_Off();
+
+typedef enum {
+    TILT_IDLE,
+    TILT_MOVING,
+    TILT_PAUSED,
+    TILT_DONE
+} TiltState;
+
+static TiltState tiltState = TILT_IDLE;
+static float targetVoltage = 0.0f;
+
+void Tilt_Start(int degree) {
+    targetVoltage = (degree / 90.0f) * 10.0f;   // 70° → 7.0 V
+    printf("[Tilt] Start tilt to %.2f V\n", targetVoltage);
+
+    float current = ReadTiltVoltage();
+
+    if (current < targetVoltage) {
+        T_Dir_On();     // pull out
+    } else {
+        T_Dir_Off();    // pull in
+    }
+
+    T_En_On();
+    tiltState = TILT_MOVING;
+}
+
+void Tilt_Pause() {
+    if (tiltState == TILT_MOVING) {
+        printf("[Tilt] Paused\n");
+        T_En_Off();
+        tiltState = TILT_PAUSED;
+    }
+}
+
+void Tilt_Resume() {
+    if (tiltState == TILT_PAUSED) {
+        printf("[Tilt] Resumed\n");
+        T_En_On();
+        tiltState = TILT_MOVING;
+    }
+}
+
+void Tilt_Stop() {
+    printf("[Tilt] Stopped\n");
+    T_En_Off();
+    tiltState = TILT_DONE;
+}
+
+bool Tilt_IsDone() {
+    return tiltState == TILT_DONE;
+}
+
+void Tilt_Update(MachineState machineState) {
+    if (tiltState == TILT_IDLE || tiltState == TILT_DONE)
+        return;
+
+    float current = ReadTiltVoltage();
+
+    // Handle pause/resume from machine daemon
+    if (machineState == STATE_PAUSED) {
+        Tilt_Pause();
+        return;
+    }
+
+    if (machineState == STATE_RUNNING && tiltState == TILT_PAUSED) {
+        Tilt_Resume();
+    }
+
+    // Movement logic
+    if (tiltState == TILT_MOVING) {
+        if (current >= targetVoltage - 0.05f &&
+            current <= targetVoltage + 0.05f) {
+
+            printf("[Tilt] Target reached: %.2f V\n", current);
+            T_En_Off();
+            tiltState = TILT_DONE;
+        }
+    }
+}

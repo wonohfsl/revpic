@@ -4,7 +4,7 @@
 #include <string.h>
 #include <errno.h>
 #include <sys/ioctl.h>
-#include <time.h>        // <-- REQUIRED for clock_gettime()
+#include <time.h>
 
 #include "piControl.h"
 #include "mio_addr.h"

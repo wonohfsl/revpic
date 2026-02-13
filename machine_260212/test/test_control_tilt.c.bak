@@ -1,0 +1,310 @@
+/**
+ * @file test_control_tilt.c
+ * @brief Comprehensive test program for validating the non-blocking tilt control engine.
+ *
+ * This test exercises the full non-blocking motion API implemented in control_tilt.c,
+ * including:
+ *   - Non-blocking MoveToVolt()
+ *   - Non-blocking homing sequence
+ *   - Pause / resume behavior during motion
+ *   - State transitions and relay control
+ *
+ * The test proceeds through the following steps:
+ *
+ * STEP 1 — Move to Home (non-blocking)
+ *   Uses ControlTilt_Home() to start at home.
+ *   Confirms basic movement and HOME proximity sensor reporting.
+ *
+ * STEP 2 — Move to 1.0 V (blocking)
+ *   Uses ControlTilt_MoveToVolt() to verify the blocking wrapper.
+ *   Confirms basic movement and ADC/degree reporting.
+ *
+ * STEP 3 — Move to 7.0 V (non-blocking)
+ *   Uses:
+ *      - ControlTilt_BeginMoveToVolt()
+ *      - ControlTilt_Service()
+ *   Behavior:
+ *      - Motion progresses in non-blocking slices.
+ *      - After 2 seconds of motion, pause_requested is asserted.
+ *      - Motion pauses mid-travel (typically around 3–4 V).
+ *      - System waits 5 seconds in paused state.
+ *      - Resume is issued by calling BeginMoveToVolt() again.
+ *      - Motion completes to the 7.0 V target.
+ *
+ * STEP 4 — Move to HOME (non-blocking)
+ *   Uses:
+ *      - ControlTilt_BeginHome()
+ *      - ControlTilt_ServiceHome()
+ *   Behavior:
+ *      - From ~7 V, actuator pulls IN toward the HOME proximity sensor.
+ *      - After 2 seconds of homing motion, pause_requested is asserted.
+ *      - Motion pauses mid-homing (typically around 5 V).
+ *      - System waits 5 seconds in paused state.
+ *      - Resume is issued by calling BeginHome() again.
+ *      - Homing completes when the HOME sensor becomes active.
+ *
+ * Throughout the test:
+ *   - PrintStatus() logs timestamp, tilt state, voltage, and degree.
+ *   - g_machine.pause_requested / resume_requested / stop_requested
+ *     are manipulated to simulate real machine control behavior.
+ *
+ * This test is intended to mimic the behavior of control.c and main.c,
+ * validating that the tilt axis supports fully non-blocking motion suitable
+ * for integration into the unified machine state machine.
+ */
+
+#include <stdio.h>
+#include <unistd.h>
+#include <time.h>
+
+#include "mio.h"
+#include "ro.h"
+#include "motion.h"
+#include "machine_state.h"
+#include "control_tilt.h"
+
+/* -------------------------------------------------------------------------
+ * Helper: print timestamp, state, and position (volt + degree)
+ * ------------------------------------------------------------------------- */
+static void PrintStatus(const char *label)
+{
+    time_t now = time(NULL);
+    struct tm *tm_now = localtime(&now);
+
+    float volt = ControlTilt_ReadVolt();
+    float deg  = ControlTilt_ReadDegree();
+
+    printf("[%02d:%02d:%02d] %-20s  state=%d  pos=%.2f V  %.2f deg\n",
+           tm_now->tm_hour,
+           tm_now->tm_min,
+           tm_now->tm_sec,
+           label,
+           g_machine.tilt_state,
+           volt,
+           deg);
+}
+
+/* -------------------------------------------------------------------------
+ * Main test program
+ * ------------------------------------------------------------------------- */
+int main(void)
+{
+    printf("=== Test: control_tilt.c (voltage-based, non-blocking) ===\n");
+
+    if (mio_init() < 0) {
+        printf("ERROR: mio_init failed\n");
+        return 1;
+    }
+    if (ro_init() < 0) {
+        printf("ERROR: ro_init failed\n");
+        return 1;
+    }
+
+    g_machine.pause_requested  = 0;
+    g_machine.resume_requested = 0;
+    g_machine.stop_requested   = 0;
+    g_machine.tilt_state       = AXIS_IDLE;
+    g_machine.rotate_state     = AXIS_IDLE;
+
+    TiltCalibration_t cal = {
+        .seat_time_ms    = 200,
+        .minimum_volts   = 0.29f,
+        .maximum_volts   = 8.55f,
+        .deadband        = 0.0f,
+        .stop_band_in    = 0.2f,
+        .stop_band_out   = 0.2f,
+        .sec_per_degree  = 0.5f,
+        .max_angle       = 75.0f,
+        .min_angle       = 0.0f,
+        .control_time_ms = 100
+    };
+	
+    ControlTilt_ApplyCalibration(&cal);
+
+	PrintStatus("Initial");
+	
+    /* ---------------------------------------------------------------------
+     * STEP 1: Move to Home (non-blocking)
+     * --------------------------------------------------------------------- */
+	printf("\nSTEP 1: Move to Home (non-blocking)\n");
+	printf("====== Manually turn on T-Axis ppoximity sensor\n");
+	
+	ControlTilt_Home();
+	PrintStatus("Start at Home");
+
+    /* ---------------------------------------------------------------------
+     * STEP 2: Move to 1.0 V (blocking)
+     * --------------------------------------------------------------------- */  
+    printf("\nSTEP 2: Move to 1.0 V (blocking)\n");
+	
+    float actual_volt = 0.0f;
+    ControlTilt_MoveToVolt(1.0f, &actual_volt);
+    PrintStatus("After move to 1V");
+
+	printf("\nSTEP 2-1: Waiting 5 seconds...\n");
+    for (int i = 0; i < 5; i++) {
+        sleep(1);
+        PrintStatus("Waiting");
+    }
+
+    /* ---------------------------------------------------------------------
+     * STEP 3: Move to 7.0 V (non-blocking)
+     * --------------------------------------------------------------------- */
+    printf("\nSTEP 3: Move to 7.0 V (non-blocking engine)\n");
+
+    g_machine.pause_requested  = 0;
+    g_machine.resume_requested = 0;
+    g_machine.stop_requested   = 0;
+
+    time_t start = time(NULL);
+
+    TiltResult_t r = ControlTilt_BeginMoveToVolt(7.0f);
+    if (r == TILT_ERROR) {
+        printf("BeginMoveToVolt failed\n");
+        return 1;
+    }
+
+    while (1) {
+        r = ControlTilt_Service(&actual_volt);
+
+        PrintStatus("Moving to 7V");
+
+        if (time(NULL) - start >= 2 && !g_machine.pause_requested) {
+            printf("\nSTEP 3-1: Pause after 2 seconds\n");
+            g_machine.pause_requested = 1;
+        }
+
+        if (r == TILT_PAUSED) {
+            PrintStatus("Paused");
+            break;
+        }
+
+        if (r == TILT_OK) {
+            printf("Reached target before pause\n");
+            break;
+        }
+
+        if (r == TILT_STOPPED || r == TILT_ERROR) {
+            printf("Motion stopped or error\n");
+            break;
+        }
+
+        sleep(1);
+    }
+
+	printf("\nSTEP 3-2: Waiting 5 seconds while paused...\n");
+    for (int i = 0; i < 5; i++) {
+        sleep(1);
+        PrintStatus("Paused wait");
+    }
+
+    printf("\nSTEP 3-3: Resume\n");
+    g_machine.pause_requested  = 0;
+    g_machine.resume_requested = 1;
+
+    r = ControlTilt_BeginMoveToVolt(7.0f);
+    if (r == TILT_ERROR) {
+        printf("BeginMoveToVolt failed on resume\n");
+        return 1;
+    }
+
+    while (1) {
+        r = ControlTilt_Service(&actual_volt);
+
+        PrintStatus("Resuming");
+
+        if (r == TILT_OK) break;
+        if (r == TILT_STOPPED || r == TILT_ERROR) break;
+
+        sleep(1);
+    }
+
+    printf("\nSTEP 3-4: Movement complete\n");
+    PrintStatus("After 7V");
+
+    /* ---------------------------------------------------------------------
+     * STEP 4: Move to HOME (non-blocking)
+     * --------------------------------------------------------------------- */
+    printf("\nSTEP 4: Move to HOME (non-blocking)\n");
+	printf("====== Manually turn off T-Axis ppoximity sensor\n");
+	
+	printf("\nSTEP 4-1: Waiting 5 seconds...\n");
+	
+    for (int i = 0; i < 5; i++) {
+        sleep(1);
+        PrintStatus("Waiting");
+    }
+
+    g_machine.pause_requested  = 0;
+    g_machine.resume_requested = 0;
+
+    start = time(NULL);
+
+    r = ControlTilt_BeginHome();
+    if (r == TILT_ERROR) {
+        printf("BeginHome failed\n");
+        return 1;
+    }
+
+    while (1) {
+        r = ControlTilt_ServiceHome();
+
+        PrintStatus("Homing");
+
+        if (time(NULL) - start >= 2 && !g_machine.pause_requested) {
+            printf("\nSTEP 4-2: Pause during homing\n");
+            g_machine.pause_requested = 1;
+        }
+
+        if (r == TILT_PAUSED) {
+            PrintStatus("Paused (home)");
+            break;
+        }
+
+        if (r == TILT_OK) {
+            printf("Reached HOME before pause\n");
+            break;
+        }
+
+        if (r == TILT_STOPPED || r == TILT_ERROR) {
+            printf("Homing stopped or error\n");
+            break;
+        }
+
+        sleep(1);
+    }
+
+	printf("\nSTEP 4-3: Waiting 5 seconds while paused (home)...\n");
+    for (int i = 0; i < 5; i++) {
+        sleep(1);
+        PrintStatus("Paused wait (home)");
+    }
+
+    printf("\nSTEP 4-4: Resume homing\n");
+	printf("====== Manually turn on T-Axis ppoximity sensor near HOME\n");
+    g_machine.pause_requested  = 0;
+    g_machine.resume_requested = 1;
+
+    r = ControlTilt_BeginHome();
+    if (r == TILT_ERROR) {
+        printf("BeginHome failed on resume\n");
+        return 1;
+    }
+
+    while (1) {
+        r = ControlTilt_ServiceHome();
+
+        PrintStatus("Resuming home");
+
+        if (r == TILT_OK) break;
+        if (r == TILT_STOPPED || r == TILT_ERROR) break;
+
+        sleep(1);
+    }
+
+    printf("\nSTEP 4-5: Homing complete\n");
+    PrintStatus("Final (home)");
+
+    printf("=== Test Complete ===\n");
+    return 0;
+}

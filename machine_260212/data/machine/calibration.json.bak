@@ -1,0 +1,26 @@
+{
+  "tilt": {
+    "seat_time": 200,
+    "minimum_volts": 0.29,
+    "maximum_volts": 8.55,
+    "deadband": 0.0,
+    "stop_band_in": 0.2,
+    "stop_band_out": 0.2,
+    "sec_per_degree": 0.5,
+    "max_angle": 75.0,
+    "min_angle": 0.0,
+    "control_time_ms": 100,
+    "is_calibrated": false,
+    "calibration_date": "2026-02-10T10:12:00Z"
+  },
+  "rotate": {
+    "sec_per_degree": 6.0,
+    "control_time_ms": 100,
+    "fault_time_sec": 80.0,
+    "overcurrent_setpoint": 3.5,
+    "motor_current_zero": 0.0,
+    "motor_current_span": 5.0,
+    "is_calibrated": false,
+    "calibration_date": "2026-02-10T10:12:00Z"
+  }
+}

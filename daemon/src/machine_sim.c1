@@ -1,0 +1,49 @@
+// machine.c
+#include <stdio.h>
+#include <stdbool.h>
+#include <unistd.h>
+#include <time.h>
+#include "tilt.h"
+
+typedef enum {
+    STATE_IDLE,
+    STATE_RUNNING,
+    STATE_PAUSED,
+    STATE_STOPPED
+} MachineState;
+
+MachineState machineState = STATE_IDLE;
+time_t startTime;
+
+int main() {
+    printf("Machine daemon started\n");
+
+    // Start Tilt(70)
+    Tilt_Start(70);                 // non-blocking start
+    machineState = STATE_RUNNING;
+    startTime = time(NULL);
+
+    while (1) {
+        sleep(1);                   // main loop tick (1 sec for demo)
+
+        // Auto-pause after 10 seconds
+        if (machineState == STATE_RUNNING) {
+            if (time(NULL) - startTime >= 10) {
+                printf("[Daemon] Auto-pause triggered after 10 sec\n");
+                machineState = STATE_PAUSED;
+                Tilt_Pause();
+            }
+        }
+
+        // Update tilt controller every loop
+        Tilt_Update(machineState);
+
+        // Exit when tilt is done or stopped
+        if (Tilt_IsDone()) {
+            printf("[Daemon] Tilt controller finished\n");
+            break;
+        }
+    }
+
+    return 0;
+}
